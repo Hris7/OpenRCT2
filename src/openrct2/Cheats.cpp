@@ -14,6 +14,7 @@
 #include "config/Config.h"
 #include "localisation/Localisation.h"
 #include "network/network.h"
+#include "peep/Guest.h"
 #include "ride/Ride.h"
 #include "scenario/Scenario.h"
 #include "util/Util.h"
@@ -437,6 +438,17 @@ static void cheat_explode_guests()
     }
 }
 
+static void cheat_guests_leave_park()
+{
+    int32_t sprite_index;
+    rct_peep* peep;
+
+    FOR_ALL_GUESTS(sprite_index, peep)
+    {
+        peep_leave_park(peep);
+    }
+}
+
 static void cheat_set_staff_speed(uint8_t value)
 {
     uint16_t spriteIndex;
@@ -574,6 +586,9 @@ void game_command_cheat(
                 break;
             case CHEAT_EXPLODEGUESTS:
                 cheat_explode_guests();
+                break;
+            case CHEAT_GUESTS_LEAVE_PARK:
+                cheat_guests_leave_park();
                 break;
             case CHEAT_GIVEALLGUESTS:
                 cheat_give_all_guests(*edx);
@@ -848,6 +863,8 @@ const char* cheats_get_cheat_string(int cheat, int edx, int edi)
             return language_get_string(STR_CHEAT_REMOVE_ALL_GUESTS);
         case CHEAT_EXPLODEGUESTS:
             return language_get_string(STR_CHEAT_EXPLODE);
+        case CHEAT_GUESTS_LEAVE_PARK:
+            return language_get_string(STR_EMPTY);
         case CHEAT_GIVEALLGUESTS:
         {
             static char cheat_string[64];

@@ -116,6 +116,7 @@ enum WINDOW_CHEATS_WIDGET_IDX
     WIDX_TRAM_GUESTS,
     WIDX_REMOVE_ALL_GUESTS,
     WIDX_EXPLODE_GUESTS,
+    WIDX_GUESTS_LEAVE_PARK,
 
     WIDX_GENERAL_GROUP = WIDX_TAB_CONTENT,
     WIDX_OPEN_CLOSE_PARK,
@@ -255,6 +256,7 @@ static rct_widget window_cheats_guests_widgets[] =
     { WWT_BUTTON,           1,      XPL(0),                 WPL(0),                 YPL(18),        HPL(18),        STR_CHEAT_LARGE_TRAM_GUESTS,        STR_CHEAT_LARGE_TRAM_GUESTS_TIP },      // large tram
     { WWT_BUTTON,           1,      XPL(1),                 WPL(1),                 YPL(18),        HPL(18),        STR_CHEAT_REMOVE_ALL_GUESTS,        STR_CHEAT_REMOVE_ALL_GUESTS_TIP },      // remove all guests
     { WWT_BUTTON,           1,      XPL(0),                 WPL(0),                 YPL(19),        HPL(19),        STR_CHEAT_EXPLODE,                  STR_CHEAT_EXPLODE_TIP },                // explode guests
+    { WWT_BUTTON,           1,      XPL(1),                 WPL(1),                 YPL(19),        HPL(19),        STR_NONE,                           STR_NONE },                             // explode guests
     { WIDGETS_END },
 };
 
@@ -526,6 +528,7 @@ static uint64_t window_cheats_page_enabled_widgets[] = {
     (1ULL << WIDX_TRAM_GUESTS) |
     (1ULL << WIDX_REMOVE_ALL_GUESTS) |
     (1ULL << WIDX_EXPLODE_GUESTS) |
+    (1ULL << WIDX_GUESTS_LEAVE_PARK) |
     (1ULL << WIDX_DISABLE_VANDALISM) |
     (1ULL << WIDX_DISABLE_LITTERING),
 
@@ -895,6 +898,9 @@ static void window_cheats_guests_mouseup(rct_window* w, rct_widgetindex widgetIn
             break;
         case WIDX_EXPLODE_GUESTS:
             game_do_command(0, GAME_COMMAND_FLAG_APPLY, CHEAT_EXPLODEGUESTS, 0, GAME_COMMAND_CHEAT, 0, 0);
+            break;
+        case WIDX_GUESTS_LEAVE_PARK:
+            game_do_command(0, GAME_COMMAND_FLAG_APPLY, CHEAT_GUESTS_LEAVE_PARK, 0, GAME_COMMAND_CHEAT, 0, 0);
             break;
         case WIDX_GIVE_GUESTS_MONEY:
             game_do_command(0, GAME_COMMAND_FLAG_APPLY, CHEAT_GIVEALLGUESTS, OBJECT_MONEY, GAME_COMMAND_CHEAT, 0, 0);

@@ -19,6 +19,7 @@
 #include "../management/Marketing.h"
 #include "../management/NewsItem.h"
 #include "../network/network.h"
+#include "../peep/Guest.h"
 #include "../ride/Ride.h"
 #include "../ride/RideData.h"
 #include "../ride/ShopItem.h"
@@ -364,7 +365,6 @@ static bool peep_really_liked_ride(rct_peep* peep, Ride* ride);
 static uint8_t peep_assess_surroundings(int16_t centre_x, int16_t centre_y, int16_t centre_z);
 static void peep_update_hunger(rct_peep* peep);
 static void peep_decide_whether_to_leave_park(rct_peep* peep);
-static void peep_leave_park(rct_peep* peep);
 static void peep_head_for_nearest_ride_type(rct_peep* peep, int32_t rideType);
 static void peep_head_for_nearest_ride_with_flags(rct_peep* peep, int32_t rideTypeFlags);
 bool loc_690FD0(rct_peep* peep, uint8_t* rideToView, uint8_t* rideSeatToView, rct_tile_element* tileElement);
@@ -2875,7 +2875,7 @@ static void peep_decide_whether_to_leave_park(rct_peep* peep)
  *
  *  rct2: 0x0068F93E
  */
-static void peep_leave_park(rct_peep* peep)
+void peep_leave_park(rct_peep* peep)
 {
     peep->guest_heading_to_ride_id = 0xFF;
     if (peep->peep_flags & PEEP_FLAGS_LEAVING_PARK)
